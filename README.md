@@ -16,6 +16,7 @@ myproject/
 │   │   ├── base.py
 │   │   ├── dev.py
 │   │   └── prod.py
+|   |   └── test.py
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── celery.py
