@@ -1,6 +1,6 @@
 # Django Backend Template v1.1
 
-A production-ready Django backend template following best practices. Includes Docker support, PostgreSQL for production, SQLite for development, Celery with Redis, and environment-based settings.
+A production-ready Django backend template following best practices. Includes Docker support, PostgreSQL for production and development, SQLite for testing, Celery with Redis, and environment-based settings.
 
 ---
 
@@ -16,6 +16,7 @@ myproject/
 │   │   ├── base.py
 │   │   ├── dev.py
 │   │   └── prod.py
+|   |   └── test.py
 │   ├── urls.py
 │   ├── wsgi.py
 │   └── celery.py
