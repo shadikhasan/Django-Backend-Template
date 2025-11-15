@@ -1,8 +1,9 @@
 Django>=4.2
-whitenoise
-gunicorn
 djangorestframework
-psycopg2
+djangorestframework-simplejwt
+psycopg2-binary
 celery>=5.3
 redis>=5.0 
 python-dotenv
+django-cors-headers
+drf-spectacular

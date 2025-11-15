@@ -1,5 +1,18 @@
-venv
-env
-/__pycache__/
-/.pytest_cache/
+# Python
+__pycache__/
 *.pyc
+*.pyo
+
+# Virtual environments
+venv/
+env/
+
+# Django / DB
+*.sqlite3
+*.log
+
+# Caches / pytest
+.pytest_cache/
+
+# Environment
+.env
