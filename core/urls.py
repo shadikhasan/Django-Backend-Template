@@ -10,6 +10,7 @@ from drf_spectacular.views import (
 urlpatterns = [
     path('admin/', admin.site.urls), 
     path('health/', health_check, name='health-check'),# Optional
+    path("api/accounts/", include("accounts.urls")),
     
     # OpenAPI schema
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
