@@ -48,6 +48,13 @@ Django-Backend-Template/
 
 ## Quick Start
 
+### 0) Download v2 branch
+
+```bash
+git clone --branch v2 --single-branch https://github.com/shadikhasan/Django-Backend-Template.git
+cd Django-Backend-Template
+```
+
 ### 1) Install
 
 ```bash
