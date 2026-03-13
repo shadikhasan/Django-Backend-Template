@@ -1,133 +1,140 @@
-# Django Backend Template v1.1
+# Django Backend Template v2
 
-A production-ready Django backend template following best practices. Includes Docker support, PostgreSQL for production and development, SQLite for testing, Celery with Redis, and environment-based settings.
-
----
-
-## 📁 Project Structure
-
-```
-myproject/
-│
-├── core/
-│   ├── __init__.py
-│   ├── settings/
-│   │   ├── __init__.py
-│   │   ├── base.py
-│   │   ├── dev.py
-│   │   └── prod.py
-|   |   └── test.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── celery.py
-│
-├── myapp/
-│   ├── models.py
-│   └── ...
-│
-├── static/
-├── media/
-├── manage.py
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
-├── .env
-└── README.md
-```
+A reusable Django backend starter with environment-based settings, Docker support, JWT auth, health check, OpenAPI docs, and a basic accounts module.
 
 ---
 
-## ⚙️ Features
+## Features
 
 - Django 4.2+
-- PostgreSQL (prod) / SQLite (dev)
-- Celery with Redis
-- Docker and Docker Compose setup
-- Separate `settings/` for base, development, and production
-- Environment variables with `os.environ`
-- Static and media file support
+- Environment-based settings (`dev`, `prod`, `test`)
+- PostgreSQL (prod/dev-ready) and SQLite (simple local/testing)
+- Celery + Redis settings
+- DRF + SimpleJWT authentication
+- OpenAPI schema + Swagger + ReDoc (`drf-spectacular`)
+- Basic `accounts` app with auth/profile/password flows
+- Health endpoint
+- Custom superuser bootstrap command
 
 ---
 
-## 🚀 Getting Started
+## Project Structure
 
-### Clone the repository
+```text
+Django-Backend-Template/
+├── accounts/
+│   ├── management/commands/create_superuser.py
+│   ├── migrations/
+│   ├── models.py
+│   ├── serializers.py
+│   ├── urls.py
+│   └── views.py
+├── common/
+├── core/
+│   ├── settings/
+│   │   ├── base.py
+│   │   ├── dev.py
+│   │   ├── prod.py
+│   │   └── test.py
+│   ├── health.py
+│   └── urls.py
+├── docker-compose.yml
+├── Dockerfile
+├── manage.py
+└── requirements.txt
+```
+
+---
+
+## Quick Start
+
+### 1) Install
 
 ```bash
-git clone https://github.com/shadikhasan/Django-Backend-Template.git
-cd Django-Backend-Template
+pip install -r requirements.txt
 ```
 
-### Create `.env`
+### 2) Configure `.env`
 
-Create a `.env` file at the root with the following:
+Use your root `.env` (sample keys):
 
-```
-DEBUG=1
-SECRET_KEY=your-secret-key
+```env
+SECRET_KEY=change-me
+DJANGO_SETTINGS_MODULE=core.settings.dev
+DEBUG=True
+ALLOWED_HOSTS=localhost,127.0.0.1
 
-# Database
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-DB_USER=postgres
-DB_PASSWORD=postgres
-DB_HOST=db
+DB_ENGINE=sqlite
+DB_HOST=postgres_service
+DB_NAME=postgres_db
+DB_USER=postgres_user
+DB_PASSWORD=postgres_password
 DB_PORT=5432
+```
 
-# Celery
-CELERY_BROKER_URL=redis://redis:6379/0
-CELERY_RESULT_BACKEND=redis://redis:6379/0
+### 3) Migrate
 
-# Allowed hosts
-ALLOWED_HOSTS=127.0.0.1,localhost
+```bash
+python3 manage.py migrate
+```
+
+### 4) Create Superuser (template command)
+
+```bash
+python3 manage.py create_superuser
+```
+
+Optional:
+
+```bash
+python3 manage.py create_superuser --manual
+```
+
+### 5) Run server
+
+```bash
+python3 manage.py runserver
 ```
 
 ---
 
-## 🐳 Run with Docker
+## Docker
 
 ```bash
 docker-compose up --build
 ```
 
-- App: http://localhost:8000
-- Redis: localhost:6379
-- PostgreSQL: localhost:5432
+---
+
+## API Endpoints
+
+Base URL: `http://localhost:8000`
+
+- `GET /health/`
+- `GET /api/schema/`
+- `GET /api/docs/`
+- `GET /api/redoc/`
+
+Accounts:
+
+- `POST /api/accounts/login/`
+- `POST /api/accounts/token/refresh/`
+- `POST /api/accounts/logout/`
+- `GET/PATCH /api/accounts/me/`
+- `POST /api/accounts/change-password/`
+- `POST /api/accounts/forgot-password/`
+- `POST /api/accounts/reset-password/`
 
 ---
 
-## 🧪 Run Migrations & Create Superuser
+## Notes
 
-```bash
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser
-```
-
----
-
-## 🏃 Run Celery
-
-```bash
-docker-compose exec celery celery -A core worker --loglevel=info
-docker-compose exec celery-beat celery -A core beat --loglevel=info
-```
+- Custom user model is enabled: `AUTH_USER_MODEL = "accounts.User"`.
+- Health endpoint returns app/database status and environment metadata.
+- For production, replace template defaults (especially superuser/password/email settings).
 
 ---
 
-## 📂 Requirements Files
+## License
 
-- `requirements.txt`: Common dependencies
-
----
-
-## 📦 Collect Static Files
-
-```bash
-docker-compose exec web python manage.py collectstatic --noinput
-```
-
----
-
-## ✨ License
-
-MIT License
+MIT
