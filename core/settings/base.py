@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     
     # 3rd party apps
     'rest_framework',
@@ -76,6 +77,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Static files
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+APP_VERSION = "1.0.0"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

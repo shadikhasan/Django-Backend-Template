@@ -1,6 +1,18 @@
 from django.http import JsonResponse
 from django.db import connection
-import os
+from django.conf import settings
+
+
+def _environment_label() -> str:
+    module_name = (settings.SETTINGS_MODULE or "").lower()
+    if "prod" in module_name:
+        return "Production"
+    if "test" in module_name:
+        return "Testing"
+    if "dev" in module_name:
+        return "Development"
+    return "Development" if settings.DEBUG else "Production"
+
 
 def health_check(request):
     try:
@@ -16,8 +28,8 @@ def health_check(request):
         {
             "status": overall_status,
             "database": db_status,
-            "environment": os.getenv("DJANGO_ENV", "development"),
-            "version": os.getenv("APP_VERSION", "1.0.0")
+            "environment": _environment_label(),
+            "version": getattr(settings, "APP_VERSION", "1.0.0"),
         },
         status=http_status
     )
