@@ -1,4 +1,4 @@
-# Django Backend Template v1.1
+# Django Backend Template v1.1.2
 
 A production-ready Django backend template following best practices. Includes Docker support, PostgreSQL for production and development, SQLite for testing, Celery with Redis, and environment-based settings.
 
@@ -65,6 +65,7 @@ Create a `.env` file at the root with the following:
 ```
 DEBUG=1
 SECRET_KEY=your-secret-key
+DJANGO_ENV=dev
 
 # Database
 DB_ENGINE=django.db.backends.postgresql

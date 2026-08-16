@@ -1,4 +1,4 @@
-Django>=4.2
+Django>=6.0.3
 djangorestframework
 djangorestframework-simplejwt
 psycopg2-binary
@@ -7,3 +7,4 @@ redis>=5.0
 python-dotenv
 django-cors-headers
 drf-spectacular
+whitenoise
