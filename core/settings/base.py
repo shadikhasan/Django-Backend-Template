@@ -43,6 +43,8 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "daphne",
+    "channels",
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
@@ -96,6 +98,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
+ASGI_APPLICATION = "core.asgi.application"
 
 
 # -------------------------------------------------------------------

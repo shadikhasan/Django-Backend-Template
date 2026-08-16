@@ -3,6 +3,8 @@ djangorestframework
 djangorestframework-simplejwt
 psycopg2-binary
 celery>=5.3
+channels
+daphne
 redis>=5.0 
 python-dotenv
 django-cors-headers
