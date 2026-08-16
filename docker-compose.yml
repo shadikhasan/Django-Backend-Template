@@ -19,7 +19,7 @@ services:
       - DB_HOST=postgres_service  # Updated database service name
       - DB_NAME=testdb
       - DB_USER=postgres
-      - DB_PASS=ss
+      - DB_PASSWORD=ss
       - SECRET_KEY=django-insecure-n7oy_o1yn!=izgniso1*%)1^#vtg49c0%h3lg%j-q$!b1t%x$k
     depends_on:
       - postgres_service  # Ensure the postgres_service starts before the django_app service
